@@ -1,0 +1,18 @@
+﻿@model DrinkListViewModel
+
+@{
+    ViewData["Title"] = "Drinks";
+}
+
+<div>
+    <h2>All drinks are shown here</h2>
+</div>
+
+
+<h2>@Model.CurrentCategory</h2>
+
+
+@foreach (var drink in Model.Drinks)
+{
+    <partial name="_DrinksSummary" model="drink" />
+}
