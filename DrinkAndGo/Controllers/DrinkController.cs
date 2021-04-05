@@ -55,5 +55,14 @@ namespace DrinkAndGo.Controllers
 
             return View(drinkListViewModel);
         }
+
+        public IActionResult Details(int drinkId)
+        {
+            var drink = _drinkRepository.GetDrinkById(drinkId);
+            if (drink == null)
+                return NotFound();
+            return View(drink);
+        }
+
     }
 }
