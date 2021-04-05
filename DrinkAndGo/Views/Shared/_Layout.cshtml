@@ -26,31 +26,40 @@
                     @await Component.InvokeAsync("CategoryMenu")
                     <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
                     @await Component.InvokeAsync("ShoppingCartSummary")
-                    @await Html.PartialAsync("_LoginPartial")
                 </ul>
+
+                <ul class="text-left">
+                    <li>@await Html.PartialAsync("_LoginPartial")</li>
+                </ul>
+
             </div>
         </div>
     </nav>
 
-    <div>
-        @RenderBody()
-    </div>
+    <div class="container">
+        <div>
+            @RenderBody()
+        </div>
 
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="text-left" style="font-size:16px; padding:5px">
-                    <p>
-                        All rights reserved &copy; @DateTime.UtcNow.Year <a href="https://github.com/mahmmoudkinawy"> Kinawy's GitHub </a>
-                    </p>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="text-left" style="font-size:16px; padding:5px">
+                        <p>
+                            All rights reserved &copy; @DateTime.UtcNow.Year <a href="https://github.com/mahmmoudkinawy"> Kinawy's GitHub </a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

@@ -30,9 +30,10 @@ namespace DrinkAndGo
             services.AddDbContext<AppDbContext>
                 (options => options.UseSqlServer(_configuration.GetConnectionString("DefaultDatabase")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                    .AddEntityFrameworkStores<AppDbContext>();
-            
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<AppDbContext>();
+
             services.AddScoped<IDrinkRepository, DrinkRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
@@ -53,11 +54,11 @@ namespace DrinkAndGo
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
             app.UseStatusCodePages();
 
             app.UseStaticFiles();
+
+            app.UseRouting();
 
             app.UseSession();
 
@@ -67,12 +68,6 @@ namespace DrinkAndGo
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //    name: "categoryFilter",
-                //    pattern: "Drink/{action}/{category?}",
-                //    defaults: new { controller = "Drink", action = "List" }
-                //);
-
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
